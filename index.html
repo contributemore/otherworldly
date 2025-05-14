@@ -2,37 +2,77 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="description" content="Michael Latsky's personal website showcasing contributions to OEIS and a profile link.">
   <link rel="canonical" href="https://www.michaellatsky.co.za/">
   <title>Michael Latsky</title>
   <style>
+    /* General body styling */
     body {
-      font-family: sans-serif;
+      font-family: 'Arial', sans-serif;
       background: linear-gradient(45deg, #f5f5f5, #e0e7ff, #d1e7e0, #f5e8d3),
-                  radial-gradient(circle at 10px 10px, rgba(0,0,0,0.1) 2px, transparent 3px);
+                  radial-gradient(circle at 10px 10px, rgba(0, 0, 0, 0.1) 2px, transparent 3px);
       background-size: 100%, 20px 20px;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
+      color: #333;
     }
+    
+    /* Styling the card */
     .card {
       background: white;
       padding: 2rem;
       border-radius: 1rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       text-align: center;
+      max-width: 90%;
+      width: 400px;
     }
+    
+    /* Heading Styling */
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    
+    /* Paragraph Styling */
+    p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+    
+    /* Link Styling */
     a {
       display: block;
       margin-top: 1rem;
       color: #0055aa;
       text-decoration: none;
       font-weight: bold;
+      transition: color 0.3s ease;
     }
+    
     a:hover {
       text-decoration: underline;
+      color: #003d73;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .card {
+        padding: 1.5rem;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      p {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
@@ -40,8 +80,8 @@
   <div class="card">
     <h1>Michael Latsky</h1>
     <p>OEIS Contributor</p>
-    <a href="https://oeis.org/wiki/User:Michael_Latsky" target="_blank">OEIS Profile</a>
-    <a href="https://oeis.org/history?user=Michael%20Latsky" target="_blank">OEIS Contributions</a>
+    <a href="https://oeis.org/wiki/User:Michael_Latsky" target="_blank" rel="noopener noreferrer">OEIS Profile</a>
+    <a href="https://oeis.org/history?user=Michael%20Latsky" target="_blank" rel="noopener noreferrer">OEIS Contributions</a>
   </div>
 </body>
 </html>
