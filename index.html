@@ -75,7 +75,8 @@ library(caret)</code></pre>
 <h1>R Examples Reference</h1>
 
 <h2>Random Distributions</h2>
-<pre><code>normal_samples <- rnorm(20, mean = 0, sd = 1)
+<pre><code># random, distributions, normal, norm, uniform, exp, poisson, binomial, rnorm, runif, rexp, rpois, rbinom
+normal_samples <- rnorm(20, mean = 0, sd = 1)
 uniform_samples <- runif(20, min = 0, max = 1)
 exp_samples <- rexp(20, rate = 0.5)
 poisson_samples <- rpois(20, lambda = 4)
@@ -83,14 +84,16 @@ binomial_samples <- rbinom(20, size = 10, prob = 0.5)
 </code></pre>
 
 <h2>Airquality Dataset Analysis</h2>
-<pre><code>library(GGally)
+<pre><code># correlation, airquality, ggpairs, gally, ozone, wind, temp, dataframe
+library(GGally)
 data("airquality")
 df = data.frame(airquality$Ozone, airquality$Wind, airquality$Temp)
 ggpairs(df)
 </code></pre>
 
 <h2>Exponential Distribution Sampling</h2>
-<pre><code>set.seed(42)
+<pre><code># matrix, exponential, transpose, dotproduct, rexp, t, %*%
+set.seed(42)
 exp_sample <- rexp(20, rate = 0.5)
 N <- matrix(exp_sample, nrow = 4)
 N1 <- t(N)
@@ -98,7 +101,8 @@ N1 %*% N
 </code></pre>
 
 <h2>MPG Dataset Exploration</h2>
-<pre><code>library(tidyverse)
+<pre><code># histogram, mpg, displ, structure, str, engine, ggplot, geom_histogram
+library(tidyverse)
 library(hrbrthemes)
 dataset <- mpg
 str(dataset)
@@ -112,7 +116,8 @@ ggplot(dataset, aes(x = engine)) +
 </code></pre>
 
 <h2>Normal Distribution Dot Product</h2>
-<pre><code>set.seed(42)
+<pre><code># dotproduct, normal, vectors, rnorm, t, %*%
+set.seed(42)
 x1 <- rnorm(60)
 x2 <- rnorm(60)
 dot_product <- t(x1) %*% x2
@@ -120,7 +125,8 @@ dot_product
 </code></pre>
 
 <h2>MPG Dataset Analysis with dplyr</h2>
-<pre><code>library(dplyr)
+<pre><code># dplyr, filter, carmodels, barplot, ggplot, geom_bar, manufacturer, subset
+library(dplyr)
 chosen_models <- c("civic", "sentra", "golf", "altima", "rogue 4wd", "malibu")
 filtered_data <- mpg %>%
   filter(model %in% chosen_models)
@@ -133,7 +139,8 @@ ggplot(filtered_data) +
 </code></pre>
 
 <h2>Engine Displacement Boxplot</h2>
-<pre><code>ggplot(filtered_data, aes(x = manufacturer, y = displ, fill = manufacturer)) +
+<pre><code># boxplot, engine, displacement, manufacturer, ggplot, geom_boxplot, mpg
+ggplot(filtered_data, aes(x = manufacturer, y = displ, fill = manufacturer)) +
   geom_boxplot() +
   labs(title = "Engine Size Across Manufacturers", 
        x = "Maker", 
@@ -142,7 +149,8 @@ ggplot(filtered_data) +
 </code></pre>
 
 <h2>Matrix Operations</h2>
-<pre><code>v1 = c(-0.94, -0.97, 0.74, -0.27, 1.25, 0.42, 0.66, -0.68, -0.63)
+<pre><code># matrix, arithmetic, determinant, inverse, eigenvalues, solve, eigen, %*%, det, sum, prod
+v1 = c(-0.94, -0.97, 0.74, -0.27, 1.25, 0.42, 0.66, -0.68, -0.63)
 v2 = c(0.40, 0.02, 2.63, -0.01, 0.72, 1.93, -0.94, -0.31, -0.30)
 M1 = matrix(v1, nrow = 3)
 M2 = matrix(v2, nrow = 3)
@@ -159,7 +167,8 @@ prod(egn_vals)
 </code></pre>
 
 <h2>Data Frame Creation and Analysis</h2>
-<pre><code>employees <- data.frame(
+<pre><code># dataframe, employees, creation, head, summary, column operations
+employees <- data.frame(
   emp_id = 101:110,
   full_name = c("Sarah", "Mike", "Tom", "Lisa", "Kelly", "James", "Rachel", 
                 "Peter", "Nina", "Alex"),
@@ -172,7 +181,8 @@ summary(employees)
 </code></pre>
 
 <h2>Probability Distributions</h2>
-<pre><code>mean_male <- 180.3
+<pre><code># probability, normal, pnorm, height, comparison, male, female, tailprobabilities
+mean_male <- 180.3
 variance_male <- 10
 mean_female <- 167.2
 variance_female <- 15
@@ -188,7 +198,8 @@ if ((prob_male_over_200 + prob_male_under_165) > prob_female_166_168) {
 </code></pre>
 
 <h2>Logarithmic Transformation Plot</h2>
-<pre><code>values <- seq(from = 0.001, to = 0.999, length.out = 1000)
+<pre><code># sequence, logplot, p.log.p, transformation, plot, log, graph
+values <- seq(from = 0.001, to = 0.999, length.out = 1000)
 log_values <- log(values)
 data_set <- data.frame(p = values, log_p = log_values)
 plot(data_set$p, data_set$log_p, type = "l", col = "blue", xlab = "p", ylab = "log(p)")
