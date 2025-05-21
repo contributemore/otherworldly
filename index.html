@@ -11,6 +11,9 @@
       padding: 20px;
       line-height: 1.6;
       background: #fdfdfd;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
     h2 {
       color: #2c3e50;
@@ -22,6 +25,8 @@
       padding: 12px;
       border-radius: 4px;
       overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
     }
     code {
       font-family: Consolas, monospace;
@@ -42,6 +47,10 @@ library(caret)
 <p><strong>📁 Importing CSV Data</strong><br>
 Use <code>read.csv("yourfile.csv")</code> to load CSV data.<br>
 Change working directory using <code>setwd("/path/to/folder")</code> and confirm with <code>getwd()</code>.</p>
+
+<p><strong>📌 Windows Path Note:</strong> In Windows, use double backslashes <code>\\</code> when specifying a directory path. Example:</p>
+<pre><code>setwd("C:\\Users\\name\\Desktop\\folder")
+</code></pre>
 
 <h1>R Examples Reference</h1>
 
