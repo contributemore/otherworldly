@@ -2,95 +2,155 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="description" content="Michael Latsky's personal website showcasing contributions to OEIS and a profile link.">
-  <link rel="canonical" href="https://www.michaellatsky.co.za/">
-  <title>Michael Latsky</title>
+  <title>R Examples</title>
   <style>
-    /* General body styling */
     body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(45deg, #0F2027,#203A43,#2C5364),
-                  radial-gradient(circle at 10px 10px, rgba(0, 0, 0, 0.1) 2px, transparent 3px);
-      background-size: 100%, 20px 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+      font-family: sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+      background: #f9f9f9;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: Consolas, monospace;
       color: #333;
-    }
-    
-    /* Styling the card */
-    .card {
-      background: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      max-width: 90%;
-      width: 400px;
-    }
-    
-    /* Heading Styling */
-    h1 {
-      font-size: 2rem;
-      margin-bottom: -0.5rem; /* Increased margin to space it more from the text below */
-      color: #333;
-    }
-    
-    /* Paragraph Styling (moved further down) */
-    p {
-      font-size: 1.1rem;
-      color: #555;
-      margin-bottom: 1rem;  /* Increased margin to move it further from the name */
-    }
-    
-    /* Button Styling */
-    a {
-      display: inline-block;
-      margin-top: 1rem;  /* Reduced margin to bring buttons closer */
-      padding: 12px 24px;
-      background-color: #0055aa;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 0.5rem;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-    
-    a:hover {
-      background-color: #003d73;
-      transform: translateY(-2px);
-    }
-    
-    a:active {
-      background-color: #003d73;
-      transform: translateY(2px);
-    }
-    
-    /* Responsive Design */
-    @media (max-width: 600px) {
-      .card {
-        padding: 1.5rem;
-      }
-      
-      h1 {
-        font-size: 1.5rem;
-      }
-      
-      p {
-        font-size: 1rem;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Michael Latsky</h1>
-    <p>OEIS Contributor</p>
-    <a href="https://oeis.org/wiki/User:Michael_Latsky" target="_blank" rel="noopener noreferrer">OEIS Profile</a>
-    <a href="https://oeis.org/history?user=Michael%20Latsky" target="_blank" rel="noopener noreferrer">OEIS Contributions</a>
-  </div>
+
+<h1>R Examples</h1>
+
+<h2>Random Distributions</h2>
+<p>Examples of generating random samples from various probability distributions:</p>
+<pre><code>normal_samples &lt;- rnorm(20, mean = 0, sd = 1)
+uniform_samples &lt;- runif(20, min = 0, max = 1)
+exp_samples &lt;- rexp(20, rate = 0.5)
+poisson_samples &lt;- rpois(20, lambda = 4)
+binomial_samples &lt;- rbinom(20, size = 10, prob = 0.5)
+</code></pre>
+
+<h2>Airquality Dataset Analysis</h2>
+<p>Work with the ‘airquality’ dataset...</p>
+<pre><code>library(GGally)
+data("airquality")
+df = data.frame(airquality$Ozone, airquality$Wind, airquality$Temp)
+ggpairs(df)
+</code></pre>
+
+<h2>Exponential Distribution Sampling</h2>
+<pre><code>set.seed(42)
+exp_sample &lt;- rexp(20, rate = 0.5)
+N &lt;- matrix(exp_sample, nrow = 4)
+N1 &lt;- t(N)
+N1 %*% N
+</code></pre>
+
+<h2>MPG Dataset Exploration</h2>
+<pre><code>library(tidyverse)
+library(hrbrthemes)
+dataset &lt;- mpg
+str(dataset)
+engine &lt;- dataset$displ
+ggplot(dataset, aes(x = engine)) +
+  geom_histogram(bins = 12, fill = "green", color = "gray") +
+  labs(title = "Histogram of Engine Displacement", 
+       x = "Engine Size", 
+       y = "Count") +
+  theme_classic()
+</code></pre>
+
+<h2>Normal Distribution Dot Product</h2>
+<pre><code>set.seed(42)
+x1 &lt;- rnorm(60)
+x2 &lt;- rnorm(60)
+dot_product &lt;- t(x1) %*% x2
+dot_product
+</code></pre>
+
+<h2>MPG Dataset Analysis with dplyr</h2>
+<pre><code>library(dplyr)
+chosen_models &lt;- c("civic", "sentra", "golf", "altima", "rogue 4wd", "malibu")
+filtered_data &lt;- mpg %&gt;%
+  filter(model %in% chosen_models)
+ggplot(filtered_data) +
+  geom_bar(aes(x = manufacturer, fill = model)) +
+  labs(title = "Distribution of Car Models by Manufacturer", 
+       x = "Maker", 
+       y = "Total") +
+  theme_minimal()
+</code></pre>
+
+<h2>Engine Displacement Boxplot</h2>
+<pre><code>ggplot(filtered_data, aes(x = manufacturer, y = displ, fill = manufacturer)) +
+  geom_boxplot() +
+  labs(title = "Engine Size Across Manufacturers", 
+       x = "Maker", 
+       y = "Displacement in Liters") +
+  theme_minimal()
+</code></pre>
+
+<h2>Matrix Operations</h2>
+<pre><code>v1 = c(-0.94, -0.97, 0.74, -0.27, 1.25, 0.42, 0.66, -0.68, -0.63)
+v2 = c(0.40, 0.02, 2.63, -0.01, 0.72, 1.93, -0.94, -0.31, -0.30)
+M1 = matrix(v1, nrow = 3)
+M2 = matrix(v2, nrow = 3)
+M1 + M2
+M1 %*% M2
+det(M1)
+invM1 = solve(M1)
+det(M1 %*% M2)
+egn_result = eigen(M1 %*% M2)
+egn_vals = egn_result$values
+egn_vectors = egn_result$vectors
+sum(egn_vals)
+prod(egn_vals)
+</code></pre>
+
+<h2>Data Frame Creation and Analysis</h2>
+<pre><code>employees &lt;- data.frame(
+  emp_id = 101:110,
+  full_name = c("Sarah", "Mike", "Tom", "Lisa", "Kelly", "James", "Rachel", 
+                "Peter", "Nina", "Alex"),
+  years = c(23, 27, 31, 29, 24, 33, 26, 28, 30, 32),
+  sex = c("F", "M", "M", "F", "F", "M", "F", "M", "F", "M"),
+)
+head(employees, 5)
+employees$years_income_total &lt;- employees$years + employees$income
+summary(employees)
+</code></pre>
+
+<h2>Probability Distributions</h2>
+<pre><code>mean_male &lt;- 180.3
+variance_male &lt;- 10
+mean_female &lt;- 167.2
+variance_female &lt;- 15
+prob_male_over_200 &lt;- 1 - pnorm(200, mean = mean_male, sd = sqrt(variance_male))
+prob_male_under_165 &lt;- pnorm(165, mean = mean_male, sd = sqrt(variance_male))
+prob_female_166_168 &lt;- pnorm(168, mean = mean_female, sd = sqrt(variance_female)) - 
+                       pnorm(166, mean = mean_female, sd = sqrt(variance_female))
+if ((prob_male_over_200 + prob_male_under_165) &gt; prob_female_166_168) {
+  cat("It is more likely to meet a man who is bigger than 200 cm or lesser than 165 cm.\n")
+} else {
+  cat("It is more likely to meet a woman who is between 166 and 168 cm.\n")
+}
+</code></pre>
+
+<h2>Sequence and Plotting</h2>
+<pre><code>values &lt;- seq(from = 0.001, to = 0.999, length.out = 1000)
+log_values &lt;- log(values)
+data_set &lt;- data.frame(p = values, log_p = log_values)
+plot(data_set$p, data_set$log_p, type = "l", col = "blue", xlab = "p", ylab = "log(p)")
+title(main = "Graph of p.log(p) for 0 &lt; p ≤ 1")
+</code></pre>
+
 </body>
 </html>
