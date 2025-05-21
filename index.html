@@ -30,6 +30,15 @@
 </head>
 <body>
 
+<p><strong>💡 Tip:</strong> Use <kbd>Ctrl</kbd> + <kbd>F</kbd> (or <kbd>Cmd</kbd> + <kbd>F</kbd> on Mac) to search this page quickly. You can search by keywords like <code>normal</code>, <code>histogram</code>, <code>dotproduct</code>, <code>rnorm</code>, <code>dplyr</code>, etc. Each code block begins with a <code>#</code> comment containing searchable tags for fast lookup.</p>
+
+<p><strong>⚠️ CARET Library Issue:</strong> If <code>library(caret)</code> fails to load in your R environment, you might need to explicitly install its dependencies with binaries. Run this before loading caret:</p>
+<pre><code>install.packages("parallelly", type="binary")
+install.packages("future", type="binary")
+#install.packages("caret")  # Uncomment if not already installed
+library(caret)
+</code></pre>
+
 <h1>R Examples Reference</h1>
 
 <h2>Random Distributions</h2>
