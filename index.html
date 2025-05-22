@@ -207,5 +207,99 @@ plot(data_set$p, data_set$log_p, type = "l", col = "blue", xlab = "p", ylab = "l
 title(main = "Graph of p.log(p) for 0 < p ≤ 1")
 </code></pre>
 
+<h2>📘 Machine Learning Modelling in R: Cheat Sheet</h2>
+
+<h3>Standard Modelling Workflow</h3>
+<pre><code>data <- read.csv("data.csv")
+data <- na.omit(data)
+
+library(caret)
+trainIndex <- createDataPartition(data$target, p = .8, list = FALSE)
+train <- data[trainIndex,]
+test <- data[-trainIndex,]
+
+model <- train(target ~ ., data = train, method = "rf")
+
+predictions <- predict(model, newdata = test)
+
+confusionMatrix(predictions, test$target)
+</code></pre>
+
+<h3>Supervised Learning - Classification</h3>
+<pre><code># Decision Tree
+library(rpart)
+fit <- rpart(target ~ ., data = train)
+
+# Random Forest
+library(randomForest)
+fit <- randomForest(target ~ ., data = train)
+
+# Gradient Boosting
+library(gbm)
+fit <- gbm(target ~ ., data = train, distribution = "bernoulli")
+
+# Support Vector Machine
+library(e1071)
+fit <- svm(target ~ ., data = train)
+</code></pre>
+
+<h3>Supervised Learning - Regression</h3>
+<pre><code># Linear Model
+fit <- lm(target ~ ., data = train)
+
+# Random Forest
+fit <- randomForest(target ~ ., data = train)
+
+# Gradient Boosting
+fit <- gbm(target ~ ., data = train, distribution = "gaussian")
+</code></pre>
+
+<h3>Unsupervised Learning - Clustering</h3>
+<pre><code># K-means
+fit <- kmeans(data, centers = 3)
+
+# Hierarchical
+dist_matrix <- dist(data)
+hc <- hclust(dist_matrix)
+plot(hc)
+</code></pre>
+
+<h3>Unsupervised Learning - Dimensionality Reduction</h3>
+<pre><code># PCA
+pca <- prcomp(data, scale. = TRUE)
+summary(pca)
+biplot(pca)
+
+# t-SNE
+library(Rtsne)
+tsne <- Rtsne(data)
+plot(tsne$Y)
+</code></pre>
+
+<h3>Model Validation</h3>
+<pre><code># Cross Validation
+trainControl <- trainControl(method = "cv", number = 10)
+model <- train(target ~ ., data = train, method = "rf", trControl = trainControl)
+
+# Leave-One-Out
+trainControl <- trainControl(method = "LOOCV")
+</code></pre>
+
+<h3>Time Series Modelling</h3>
+<pre><code>library(forecast)
+
+ts_data <- ts(data$column, start = c(2000, 1), frequency = 12)
+
+fit <- auto.arima(ts_data)
+forecasted <- forecast(fit, h = 12)
+plot(forecasted)
+</code></pre>
+
+<h3>Feature Selection</h3>
+<pre><code>library(caret)
+control <- rfeControl(functions = rfFuncs, method = "cv", number = 10)
+results <- rfe(train[, -target_index], train$target, sizes = c(1:5), rfeControl = control)
+</code></pre>
+
 </body>
 </html>
