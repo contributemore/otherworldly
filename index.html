@@ -198,8 +198,12 @@ employees <- data.frame(
   full_name = c("Sarah", "Mike", "Tom", "Lisa", "Kelly", "James", "Rachel", 
                 "Peter", "Nina", "Alex"),
   years = c(23, 27, 31, 29, 24, 33, 26, 28, 30, 32),
-  sex = c("F", "M", "M", "F", "F", "M", "F", "M", "F", "M"),
+  sex = c("F", "M", "M", "F", "F", "M", "F", "M", "F", "M")
 )
+
+employees$income <- c(100, 120, 90, 100, 120, 90, 100, 120, 90, 12)
+
+
 head(employees, 5)
 employees$years_income_total <- employees$years + employees$income
 summary(employees)
