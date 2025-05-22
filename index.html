@@ -75,7 +75,7 @@ library(caret)</code></pre>
 
 <h1>R Examples Reference</h1>
 
-<h2>Random Distributions</h2>
+<h2>001) Random Distributions</h2>
 <pre><code># random, distributions, normal, norm, uniform, exp, poisson, binomial, rnorm, runif, rexp, rpois, rbinom
 normal_samples <- rnorm(20, mean = 0, sd = 1)
 uniform_samples <- runif(20, min = 0, max = 1)
@@ -84,7 +84,7 @@ poisson_samples <- rpois(20, lambda = 4)
 binomial_samples <- rbinom(20, size = 10, prob = 0.5)
 </code></pre>
 
-<h2>Airquality Dataset Analysis</h2>
+<h2>002) Airquality Dataset Analysis</h2>
 <pre><code># correlation, airquality, ggpairs, gally, ozone, wind, temp, dataframe
 library(GGally)
 data("airquality")
@@ -92,7 +92,7 @@ df = data.frame(airquality$Ozone, airquality$Wind, airquality$Temp)
 ggpairs(df)
 </code></pre>
 
-<h2>Exponential Distribution Sampling</h2>
+<h2>003) Exponential Distribution Sampling</h2>
 <pre><code># matrix, exponential, transpose, dotproduct, rexp, t, %*%
 set.seed(42)
 exp_sample <- rexp(20, rate = 0.5)
@@ -101,7 +101,7 @@ N1 <- t(N)
 N1 %*% N
 </code></pre>
 
-<h2>MPG Dataset Exploration</h2>
+<h2>004) MPG Dataset Exploration</h2>
 <pre><code># histogram, mpg, displ, structure, str, engine, ggplot, geom_histogram
 library(tidyverse)
 library(hrbrthemes)
@@ -116,7 +116,7 @@ ggplot(dataset, aes(x = engine)) +
   theme_classic()
 </code></pre>
 
-<h2>Normal Distribution Dot Product</h2>
+<h2>005) Normal Distribution Dot Product</h2>
 <pre><code># dotproduct, normal, vectors, rnorm, t, %*%
 set.seed(42)
 x1 <- rnorm(60)
@@ -125,7 +125,7 @@ dot_product <- t(x1) %*% x2
 dot_product
 </code></pre>
 
-<h2>MPG Dataset Analysis with dplyr</h2>
+<h2>006) MPG Dataset Analysis with dplyr</h2>
 <pre><code># dplyr, filter, carmodels, barplot, ggplot, geom_bar, manufacturer, subset
 library(dplyr)
 chosen_models <- c("civic", "sentra", "golf", "altima", "rogue 4wd", "malibu")
@@ -139,7 +139,7 @@ ggplot(filtered_data) +
   theme_minimal()
 </code></pre>
 
-<h2>Engine Displacement Boxplot</h2>
+<h2>007) Engine Displacement Boxplot</h2>
 <pre><code># boxplot, engine, displacement, manufacturer, ggplot, geom_boxplot, mpg
 ggplot(filtered_data, aes(x = manufacturer, y = displ, fill = manufacturer)) +
   geom_boxplot() +
@@ -149,7 +149,7 @@ ggplot(filtered_data, aes(x = manufacturer, y = displ, fill = manufacturer)) +
   theme_minimal()
 </code></pre>
 
-<h2>Matrix Operations</h2>
+<h2>008) Matrix Operations</h2>
 <pre><code># matrix, arithmetic, determinant, inverse, eigenvalues, solve, eigen, %*%, det, sum, prod
 v1 = c(-0.94, -0.97, 0.74, -0.27, 1.25, 0.42, 0.66, -0.68, -0.63)
 v2 = c(0.40, 0.02, 2.63, -0.01, 0.72, 1.93, -0.94, -0.31, -0.30)
@@ -167,7 +167,7 @@ sum(egn_vals)
 prod(egn_vals)
 </code></pre>
 
-<h2>Data Frame Creation and Analysis</h2>
+<h2>009) Data Frame Creation and Analysis</h2>
 <pre><code># dataframe, employees, creation, head, summary, column operations
 employees <- data.frame(
   emp_id = 101:110,
@@ -181,7 +181,7 @@ employees$years_income_total <- employees$years + employees$income
 summary(employees)
 </code></pre>
 
-<h2>Probability Distributions</h2>
+<h2>010) Probability Distributions</h2>
 <pre><code># probability, normal, pnorm, height, comparison, male, female, tailprobabilities
 mean_male <- 180.3
 variance_male <- 10
@@ -198,7 +198,7 @@ if ((prob_male_over_200 + prob_male_under_165) > prob_female_166_168) {
 }
 </code></pre>
 
-<h2>Logarithmic Transformation Plot</h2>
+<h2>011) Logarithmic Transformation Plot</h2>
 <pre><code># sequence, logplot, p.log.p, transformation, plot, log, graph
 values <- seq(from = 0.001, to = 0.999, length.out = 1000)
 log_values <- log(values)
@@ -209,7 +209,7 @@ title(main = "Graph of p.log(p) for 0 < p ≤ 1")
 
 <h1>📘 Machine Learning Modelling</h21>
 
-<h2>Standard Modelling Workflow</h2>
+<h2>012) Standard Modelling Workflow</h2>
 <pre><code>data <- read.csv("data.csv")
 data <- na.omit(data)
 
@@ -225,7 +225,7 @@ predictions <- predict(model, newdata = test)
 confusionMatrix(predictions, test$target)
 </code></pre>
 
-<h2>Supervised Learning - Classification</h2>
+<h2>013) Supervised Learning - Classification</h2>
 <pre><code># Decision Tree
 library(rpart)
 fit <- rpart(target ~ ., data = train)
@@ -243,7 +243,7 @@ library(e1071)
 fit <- svm(target ~ ., data = train)
 </code></pre>
 
-<h2>Supervised Learning - Regression</h2>
+<h2>014) Supervised Learning - Regression</h2>
 <pre><code># Linear Model
 fit <- lm(target ~ ., data = train)
 
@@ -254,7 +254,7 @@ fit <- randomForest(target ~ ., data = train)
 fit <- gbm(target ~ ., data = train, distribution = "gaussian")
 </code></pre>
 
-<h2>Unsupervised Learning - Clustering</h2>
+<h2>015) Unsupervised Learning - Clustering</h2>
 <pre><code># K-means
 fit <- kmeans(data, centers = 3)
 
@@ -264,7 +264,7 @@ hc <- hclust(dist_matrix)
 plot(hc)
 </code></pre>
 
-<h2>Unsupervised Learning - Dimensionality Reduction</h2>
+<h2>016) Unsupervised Learning - Dimensionality Reduction</h2>
 <pre><code># PCA
 pca <- prcomp(data, scale. = TRUE)
 summary(pca)
@@ -276,7 +276,7 @@ tsne <- Rtsne(data)
 plot(tsne$Y)
 </code></pre>
 
-<h2>Model Validation</h2>
+<h2>017) Model Validation</h2>
 <pre><code># Cross Validation
 trainControl <- trainControl(method = "cv", number = 10)
 model <- train(target ~ ., data = train, method = "rf", trControl = trainControl)
@@ -285,7 +285,7 @@ model <- train(target ~ ., data = train, method = "rf", trControl = trainControl
 trainControl <- trainControl(method = "LOOCV")
 </code></pre>
 
-<h2>Time Series Modelling</h2>
+<h2>018) Time Series Modelling</h2>
 <pre><code>library(forecast)
 
 ts_data <- ts(data$column, start = c(2000, 1), frequency = 12)
@@ -295,7 +295,7 @@ forecasted <- forecast(fit, h = 12)
 plot(forecasted)
 </code></pre>
 
-<h2>Feature Selection</h2>
+<h2>019) Feature Selection</h2>
 <pre><code>library(caret)
 control <- rfeControl(functions = rfFuncs, method = "cv", number = 10)
 results <- rfe(train[, -target_index], train$target, sizes = c(1:5), rfeControl = control)
