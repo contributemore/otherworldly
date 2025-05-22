@@ -76,7 +76,6 @@
   });
 </script>
 
-
 <div class="infobox">
   <h2><strong>💡 Tip:</strong> Use <kbd>Ctrl</kbd> + <kbd>F</kbd> to search this page quickly. You can search by keywords like <code>"normal"</code> or <code>"eigen"</code>.</h2>
   <p><strong>⚠️ CARET Library Issue:</strong> If <code>library(caret)</code> fails to load in your R environment, you might need to explicitly install its dependencies with binaries. Run this before loading caret:</p>
@@ -338,32 +337,7 @@ control <- rfeControl(functions = rfFuncs, method = "cv", number = 10)
 results <- rfe(train[, -target_index], train$target, sizes = c(1:5), rfeControl = control)
 </code></pre>
 
-<h2>020) For Loop Fibonacci</h2>
-<pre><code># fibonacci, loop, sequence, for, iteration
-a <- 1
-b <- 2
-for(i in 1:10){
-  print(a)
-  a <- (b <- a + b) - a
-}</code></pre>
-
-<h2>021) Factorial of n Using Repeat</h2>
-<pre><code># factorial, repeat, control, multiplication, break
-n <- 5
-if (n < 0) {
-  print("Error")
-} else {
-  factorial <- 1
-  repeat {
-    if (n == 0) {
-      break}
-    factorial <- factorial * n
-    n <- n - 1
-  }
-  print(factorial)
-}</code></pre>
-
-<h2>022) Neural Network Regression with NeuralNetTools</h2>
+<h2>020) Neural Network Regression with NeuralNetTools</h2>
 <pre><code># neuralnet, regression, prediction, mse, mtcars, scaling, neural network, plotnet
 library(NeuralNetTools)
 library(neuralnet)
@@ -379,7 +353,7 @@ mse <- mean((test_data$mpg - predictions_scaled)^2)
 cat("MSE:", mse)
 plotnet(nn)</code></pre>
 
-<h2>023) Linear Regression with glm</h2>
+<h2>021) Linear Regression with glm</h2>
 <pre><code># glm, linear model, regression, gaussian, prediction, mse, summary, mtcars
 
 data(mtcars)
@@ -393,7 +367,7 @@ predictions <- predict(model, newdata = test_data)
 mse <- mean((test_data$mpg - predictions)^2)
 cat("The Mean Squared Error of the predictions is", mse)</code></pre>
 
-<h2>024) SVM Regression Comparison (Radial vs Polynomial Kernel)</h2>
+<h2>022) SVM Regression Comparison (Radial vs Polynomial Kernel)</h2>
 <pre><code># svm, regression, mtcars, radial, polynomial, accuracy, prediction, caret
 library(e1071)
 library(caret)
@@ -418,7 +392,7 @@ svm_accuracy2 <- postResample(predictions2, mtcarsTest$mpg)
 svm_accuracy1
 svm_accuracy2</code></pre>
 
-<h2>025) SVM Regression Contour Plot</h2>
+<h2>023) SVM Regression Contour Plot</h2>
 <pre><code># svm, radial, contour, wt, hp, prediction, ggplot2
 svm_model3 <- svm(mpg ~ wt + hp, data = mtcarsTrain, type = "eps-regression", kernel = 'radial')
 
@@ -434,7 +408,7 @@ ggplot(grid, aes(x = wt, y = hp, fill = mpg)) +
   theme_minimal() +
   geom_point(data = mtcars, aes(x = wt, y = hp, color = mpg), size = 3)</code></pre>
 
-<h2>026) Logistic Regression and Regression Line</h2>
+<h2>024) Logistic Regression and Regression Line</h2>
 <pre><code># glm, logistic regression, vs, regression line, mpg, wt
 model <- glm(vs ~ mpg + wt + hp, data = mtcars, family = binomial)
 summary(model)
@@ -445,7 +419,7 @@ ggplot(mtcars, aes(x=wt, y=mpg)) +
   theme_minimal() +
   labs(title="Simple Linear Regression: MPG vs Weight", x="Weight", y="Miles per Gallon")</code></pre>
 
-<h2>027) ANOVA with PlantGrowth</h2>
+<h2>025) ANOVA with PlantGrowth</h2>
 <pre><code># anova, PlantGrowth, summary, group comparison
 data(PlantGrowth)
 str(PlantGrowth)
@@ -454,7 +428,7 @@ summary(PlantGrowth)
 model <- aov(weight ~ group, data=PlantGrowth)
 summary(model)</code></pre>
 
-<h2>028) ANN Model on Rock Dataset</h2>
+<h2>026) ANN Model on Rock Dataset</h2>
 <pre><code># ann, neuralnet, normalization, rock, plotnet
 library(neuralnet)
 library(NeuralNetTools)
@@ -469,6 +443,33 @@ scaled_rock <- as.data.frame(scale(rock, center = mins, scale = maxs - mins))
 set.seed(123)
 nn <- neuralnet(perm ~ area + peri + shape, data = scaled_rock)
 plotnet(nn)</code></pre>
+
+<h1>Loops, Repeats and Factorials</h1>
+
+<h2>027) For Loop Fibonacci</h2>
+<pre><code># fibonacci, loop, sequence, for, iteration
+a <- 1
+b <- 2
+for(i in 1:10){
+  print(a)
+  a <- (b <- a + b) - a
+}</code></pre>
+
+<h2>028) Factorial of n Using Repeat</h2>
+<pre><code># factorial, repeat, control, multiplication, break
+n <- 5
+if (n < 0) {
+  print("Error")
+} else {
+  factorial <- 1
+  repeat {
+    if (n == 0) {
+      break}
+    factorial <- factorial * n
+    n <- n - 1
+  }
+  print(factorial)
+}</code></pre>
 
 <h2>029) Factorial Function Using For Loop</h2>
 <pre><code># factorial, for loop, function
