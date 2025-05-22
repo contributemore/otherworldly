@@ -203,10 +203,7 @@ employees <- data.frame(
   years = c(23, 27, 31, 29, 24, 33, 26, 28, 30, 32),
   sex = c("F", "M", "M", "F", "F", "M", "F", "M", "F", "M")
 )
-
 employees$income <- c(100, 120, 90, 100, 120, 90, 100, 120, 90, 12)
-
-
 head(employees, 5)
 employees$years_income_total <- employees$years + employees$income
 summary(employees)
@@ -242,18 +239,13 @@ title(main = "Graph of p.log(p) for 0 < p ≤ 1")
 
 <h2>012) Standard Modelling Workflow</h2>
 <pre><code>library(caret)
-
 data <- read.csv("data.csv")
 data <- na.omit(data)
-
 trainIndex <- createDataPartition(data$target, p = .8, list = FALSE)
 train <- data[trainIndex,]
 test <- data[-trainIndex,]
-
 model <- train(target ~ ., data = train, method = "rf")
-
 predictions <- predict(model, newdata = test)
-
 confusionMatrix(predictions, test$target)
 </code></pre>
 
@@ -261,15 +253,12 @@ confusionMatrix(predictions, test$target)
 <pre><code># Decision Tree
 library(rpart)
 fit <- rpart(target ~ ., data = train)
-
 # Random Forest
 library(randomForest)
 fit <- randomForest(target ~ ., data = train)
-
 # Gradient Boosting
 library(gbm)
 fit <- gbm(target ~ ., data = train, distribution = "bernoulli")
-
 # Support Vector Machine
 library(e1071)
 fit <- svm(target ~ ., data = train)
@@ -278,11 +267,9 @@ fit <- svm(target ~ ., data = train)
 <h2>014) Supervised Learning - Regression</h2>
 <pre><code># Linear Model
 fit <- lm(target ~ ., data = train)
-
 # Random Forest
 library(randomForest)
 fit <- randomForest(target ~ ., data = train)
-
 # Gradient Boosting
 library(gbm)
 fit <- gbm(target ~ ., data = train, distribution = "gaussian")
@@ -291,7 +278,6 @@ fit <- gbm(target ~ ., data = train, distribution = "gaussian")
 <h2>015) Unsupervised Learning - Clustering</h2>
 <pre><code># K-means
 fit <- kmeans(data, centers = 3)
-
 # Hierarchical
 dist_matrix <- dist(data)
 hc <- hclust(dist_matrix)
@@ -303,7 +289,6 @@ plot(hc)
 pca <- prcomp(data, scale. = TRUE)
 summary(pca)
 biplot(pca)
-
 # t-SNE
 library(Rtsne)
 tsne <- Rtsne(data)
@@ -316,16 +301,13 @@ plot(tsne$Y)
 # Cross Validation
 trainControl <- trainControl(method = "cv", number = 10)
 model <- train(target ~ ., data = train, method = "rf", trControl = trainControl)
-
 # Leave-One-Out
 trainControl <- trainControl(method = "LOOCV")
 </code></pre>
 
 <h2>018) Time Series Modelling</h2>
 <pre><code>library(forecast)
-
 ts_data <- ts(data$column, start = c(2000, 1), frequency = 12)
-
 fit <- auto.arima(ts_data)
 forecasted <- forecast(fit, h = 12)
 plot(forecasted)
@@ -355,7 +337,6 @@ plotnet(nn)</code></pre>
 
 <h2>021) Linear Regression with glm</h2>
 <pre><code># glm, linear model, regression, gaussian, prediction, mse, summary, mtcars
-
 data(mtcars)
 set.seed(123)
 indices <- sample(1:nrow(mtcars), nrow(mtcars)*0.7)
@@ -372,21 +353,16 @@ cat("The Mean Squared Error of the predictions is", mse)</code></pre>
 library(e1071)
 library(caret)
 data(mtcars)
-
 set.seed(123)
 trainIndex <- createDataPartition(mtcars$mpg, p = 0.7, list = FALSE)
 mtcarsTrain <- mtcars[trainIndex,]
 mtcarsTest <- mtcars[-trainIndex,]
-
 svm_model1 <- svm(mpg ~ ., data = mtcarsTrain, type = "eps-regression", kernel = 'radial')
 summary(svm_model1)
-
 svm_model2 <- svm(mpg ~ ., data = mtcarsTrain, type = "eps-regression", kernel = 'polynomial')
 summary(svm_model2)
-
 predictions1 <- predict(svm_model1, mtcarsTest)
 predictions2 <- predict(svm_model2, mtcarsTest)
-
 svm_accuracy1 <- postResample(predictions1, mtcarsTest$mpg)
 svm_accuracy2 <- postResample(predictions2, mtcarsTest$mpg)
 svm_accuracy1
@@ -395,12 +371,10 @@ svm_accuracy2</code></pre>
 <h2>023) SVM Regression Contour Plot</h2>
 <pre><code># svm, radial, contour, wt, hp, prediction, ggplot2
 svm_model3 <- svm(mpg ~ wt + hp, data = mtcarsTrain, type = "eps-regression", kernel = 'radial')
-
 wt_seq <- seq(min(mtcarsTrain$wt), max(mtcarsTrain$wt), length.out = 100)
 hp_seq <- seq(min(mtcarsTrain$hp), max(mtcarsTrain$hp), length.out = 100)
 grid <- expand.grid(wt = wt_seq, hp = hp_seq)
 grid$mpg <- predict(svm_model3, newdata = grid)
-
 ggplot(grid, aes(x = wt, y = hp, fill = mpg)) +
   geom_tile() +
   geom_contour(aes(z = mpg), color = "white") +
@@ -412,7 +386,6 @@ ggplot(grid, aes(x = wt, y = hp, fill = mpg)) +
 <pre><code># glm, logistic regression, vs, regression line, mpg, wt
 model <- glm(vs ~ mpg + wt + hp, data = mtcars, family = binomial)
 summary(model)
-
 ggplot(mtcars, aes(x=wt, y=mpg)) +
   geom_point() +
   geom_smooth(method=lm, se=FALSE, color="red", linetype="dashed") +
@@ -424,7 +397,6 @@ ggplot(mtcars, aes(x=wt, y=mpg)) +
 data(PlantGrowth)
 str(PlantGrowth)
 summary(PlantGrowth)
-
 model <- aov(weight ~ group, data=PlantGrowth)
 summary(model)</code></pre>
 
@@ -435,11 +407,9 @@ library(NeuralNetTools)
 data("rock")
 str(rock)
 summary(rock)
-
 maxs <- apply(rock, 2, max)
 mins <- apply(rock, 2, min)
 scaled_rock <- as.data.frame(scale(rock, center = mins, scale = maxs - mins))
-
 set.seed(123)
 nn <- neuralnet(perm ~ area + peri + shape, data = scaled_rock)
 plotnet(nn)</code></pre>
