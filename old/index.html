@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R Examples Reference</title>
+  <meta name="description" content="R programming examples for statistical analysis, data visualization, matrix operations, and more.">
+  <meta name="keywords" content="R, exam, distributions, ggplot2, dplyr, matrix, data analysis, reference">
+
+  <link rel="canonical" href="https://www.michaellatsky.co.za/">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <style>
+    body {
+      font-family: Consolas, monospace;
+      padding: 20px;
+      line-height: 1.6;
+      background: #fdfdfd;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    h2 {
+      color: #2c3e50;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 12px;
+      border-radius: 4px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    code {
+      font-family: Consolas, monospace;
+    }
+    .infobox {
+      background: #eaf6ff;
+      border-left: 6px solid #3498db;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .infobox pre {
+      background: #2d2d2d;
+      color: #f8f8f2;
+    }
+    input#searchInput {
+      margin-bottom: 20px;
+      padding: 8px;
+      width: 100%;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="infobox">
+  <h2><strong>💡 Tip:</strong> Use the search box or <kbd>Ctrl</kbd>+<kbd>F</kbd> to search this page quickly. Search keywords like <code>"normal"</code> or <code>"eigen"</code>.</h2>
+  <p><strong>⚠️ CARET Library Issue:</strong> If <code>library(caret)</code> fails to load in your R environment, you might need to explicitly install its dependencies with binaries. Run this before loading caret:</p>
+  <pre><code>install.packages("parallelly", type="binary")
+install.packages("future", type="binary")
+#install.packages("caret")  # Uncomment if not already installed
+library(caret)</code></pre>
+
+  <p><strong>📁 Importing CSV Data</strong><br>
+  Use <code>read.csv("yourfile.csv")</code> to load CSV data.<br>
+  Change working directory using <code>setwd("/path/to/folder")</code> and confirm with <code>getwd()</code>.</p>
+
+  <p><strong>Windows Path Note:</strong> In Windows, use double backslashes <code>\\</code> when specifying a directory path. Example:</p>
+  <pre><code>setwd("C:\\Users\\name\\Desktop\\folder")</code></pre>
+
+  <p><a href="https://www.michaellatsky.co.za/old" target="_blank" rel="noopener noreferrer">old</a></p>
+</div>
+
+<h1>R Examples Reference</h1>
+
+<h2>001) Random Distributions</h2>
+<pre><code># random, distributions, normal, norm, uniform, exp, poisson, binomial, rnorm, runif, rexp, rpois, rbinom
+normal_samples <- rnorm(20, mean = 0, sd = 1)
+uniform_samples <- runif(20, min = 0, max = 1)
+exp_samples <- rexp(20, rate = 0.5)
+poisson_samples <- rpois(20, lambda = 4)
+binomial_samples <- rbinom(20, size = 10, prob = 0.5)
+</code></pre>
+
+<h2>002) Airquality Dataset Analysis</h2>
+<pre><code># correlation, airquality, ggpairs, gally, ozone, wind, temp, dataframe
+library(GGally)
+data("airquality")
+df = data.frame(airquality$Ozone, airquality$Wind, airquality$Temp)
+ggpairs(df)
+</code></pre>
+
+<h2>003) Exponential Distribution Sampling</h2>
+<pre><code># matrix, exponential, transpose, dotproduct, rexp, t, %*%
+set.seed(42)
+exp_sample <- rexp(20, rate = 0.5)
+N <- matrix(exp_sample, nrow = 4)
+N1 <- t(N)
+N1 %*% N
+</code></pre>
+
+<h2>004) MPG Dataset Exploration</h2>
+<pre><code># histogram, mpg, displ, structure, str, engine, ggplot, geom_histogram
+library(tidyverse)
+library(hrbrthemes)
+dataset <- mpg
+str(dataset)
+engine <- dataset$displ
+ggplot(dataset, aes(x = engine)) +
+  geom_histogram(bins = 12, fill = "green", color = "gray") +
+  labs(title = "Histogram of Engine Displacement", 
+       x = "Engine Size", 
+       y = "Count") +
+  theme_classic()
+</code></pre>
+
+<h2>005) Normal Distribution Dot Product</h2>
+<pre><code># dotproduct, normal, vectors, rnorm, t, %*%
+set.seed(42)
+x1 <- rnorm(60)
+x2 <- rnorm(60)
+dot_product <- t(x1) %*% x2
+dot_product
+</code></pre>
+
+<h2>006) MPG Dataset Analysis with dplyr</h2>
+<pre><code># dplyr, filter, carmodels, barplot, ggplot, geom_bar, manufacturer, subset
+library(dplyr)
+library(ggplot2)
+chosen_models <- c("civic", "sentra", "golf", "altima", "rogue 4wd", "malibu")
+filtered_data <- mpg %>%
+  filter(model %in% chosen_models)
+ggplot(filtered_data) +
+  geom_bar(aes(x = manufacturer, fill = model)) +
+  labs(title = "Distribution of Car Models by Manufacturer", 
+       x = "Maker", 
+       y = "Total") +
+  theme_minimal()
+</code></pre>
+
+<h2>007) Engine Displacement Boxplot</h2>
+<pre><code># boxplot, engine, displacement, manufacturer, ggplot, geom_boxplot, mpg
+library(ggplot2)
+library(dplyr)
+
+# reuse filtered_data from previous example or redefine
+filtered_data <- mpg %>%
+  filter(model %in% c("civic", "sentra", "golf", "altima", "rogue 4wd", "malibu"))
+
+ggplot(filtered_data, aes(x = manufacturer, y = displ, fill = manufacturer)) +
+  geom_boxplot() +
+  labs(title = "Engine Size Across Manufacturers", 
+       x = "Maker", 
+       y = "Displacement in Liters") +
+  theme_minimal()
+</code></pre>
+
+<h2>008) Matrix Operations</h2>
+<pre><code># matrix, arithmetic, determinant, inverse, eigenvalues, solve, eigen, %*%, det, sum, prod
+v1 = c(-0.94, -0.97, 0.74, -0.27, 1.25, 0.42, 0.66, -0.68, -0.63)
+v2 = c(0.40, 0.02, 2.63, -0.01, 0.72, 1.93, -0.94, -0.31, -0.30)
+M1 = matrix(v1, nrow = 3)
+M2 = matrix(v2, nrow = 3)
+M1 + M2
+M1 %*% M2
+det(M1)
+invM1 = solve(M1)
+det(M1 %*% M2)
+egn_result = eigen(M1 %*% M2)
+egn_vals = egn_result$values
+egn_vectors = egn_result$vectors
+sum(egn_vals)
+prod(egn_vals)
+</code></pre>
+
+<h2>009) Data Frame Creation and Analysis</h2>
+<pre><code># dataframe, employees, creation, head, summary, column operations
+employees <- data.frame(
+  emp_id = 101:110,
+  full_name = c("Sarah", "Mike", "Tom", "Lisa", "Kelly", "James", "Rachel", 
+                "Peter", "Nina", "Alex"),
+  years = c(23, 27, 31, 29, 24, 33, 26, 28, 30, 32),
+  sex = c("F", "M", "M", "F", "F", "M", "F", "M", "F", "M")
+)
+employees$income <- c(100, 120, 90, 100, 120, 90, 100, 120, 90, 12)
+head(employees, 5)
+employees$years_income_total <- employees$years + employees$income
+summary(employees)
+</code></pre>
+
+<h2>010) Probability Distributions</h2>
+<pre><code># probability, normal, pnorm, height, comparison, male, female, tailprobabilities
+mean_male <- 180.3
+variance_male <- 10
+mean_female <- 167.2
+variance_female <- 15
+prob_male_over_200 <- 1 - pnorm(200, mean = mean_male, sd = sqrt(variance_male))
+prob_male_under_165 <- pnorm(165, mean = mean_male, sd = sqrt(variance_male))
+prob_female_166_168 <- pnorm(168, mean = mean_female, sd = sqrt(variance_female)) - 
+                       pnorm(166, mean = mean_female, sd = sqrt(variance_female))
+if ((prob_male_over_200 + prob_male_under_165) > prob_female_166_168) {
+  cat("It is more likely to meet a man who is bigger than 200 cm or lesser than 165 cm.\n")
+} else {
+  cat("It is more likely to meet a woman who is between 166 and 168 cm.\n")
+}
+</code></pre>
+
+<h2>011) Logarithmic Transformation Plot</h2>
+<pre><code># sequence, logplot, p.log.p, transformation, plot, log, graph
+values <- seq(from = 0.001, to = 0.999, length.out = 1000)
+log_values <- log(values)
+data_set <- data.frame(p = values, log_p = log_values)
+plot(data_set$p, data_set$log_p, type = "l", col = "blue", xlab = "p", ylab = "log(p)")
+title(main = "Graph of p.log(p) for 0 < p ≤ 1")
+</code></pre>
+
+<h1>Machine Learning Modelling</h1>
+
+<h2>012) Standard Modelling Workflow</h2>
+<pre><code>library(caret)
+data <- read.csv("data.csv")
+data <- na.omit(data)
+trainIndex <- createDataPartition(data$target, p = .8, list = FALSE)
+train <- data[trainIndex,]
+test <- data[-trainIndex,]
+model <- train(target ~ ., data = train, method = "rf")
+predictions <- predict(model, newdata = test)
+confusionMatrix(predictions, test$target)
+</code></pre>
+
+<h2>013) Supervised Learning - Classification</h2>
+<pre><code># Decision Tree
+library(rpart)
+fit <- rpart(target ~ ., data = train)
+# Random Forest
+library(randomForest)
+fit <- randomForest(target ~ ., data = train)
+# Gradient Boosting
+library(gbm)
+fit <- gbm(target ~ ., data = train, distribution = "bernoulli")
+# Support Vector Machine
+library(e1071)
+fit <- svm(target ~ ., data = train)
+</code></pre>
+
+<h2>014) Supervised Learning - Regression</h2>
+<pre><code># Linear Model
+fit <- lm(target ~ ., data = train)
+# Random Forest
+library(randomForest)
+fit <- randomForest(target ~ ., data = train)
+# Gradient Boosting
+library(gbm)
+fit <- gbm(target ~ ., data = train, distribution = "gaussian")
+</code></pre>
+
+<h2>015) Unsupervised Learning - Clustering</h2>
+<pre><code># K-means
+fit <- kmeans(data, centers = 3)
+# Hierarchical
+dist_matrix <- dist(data)
+hc <- hclust(dist_matrix)
+plot(hc)
+</code></pre>
+
+<h2>016) Unsupervised Learning - Dimensionality Reduction</h2>
+<pre><code># PCA
+pca <- prcomp(data, scale. = TRUE)
+summary(pca)
+biplot(pca)
+# t-SNE
+library(Rtsne)
+tsne <- Rtsne(data)
+plot(tsne$Y)
+</code></pre>
+
+<h2>017) Model Validation</h2>
+<pre><code>library(caret)
+
+# Cross Validation
+trainControl <- trainControl(method = "cv", number = 10)
+model <- train(target ~ ., data = train, method = "rf", trControl = trainControl)
+# Leave-One-Out
+trainControl <- trainControl(method = "LOOCV")
+</code></pre>
+
+<h2>018) Time Series Modelling</h2>
+<pre><code>library(forecast)
+ts_data <- ts(data$column, start = c(2000, 1), frequency = 12)
+fit <- auto.arima(ts_data)
+forecasted <- forecast(fit, h = 12)
+plot(forecasted)
+</code></pre>
+
+<h2>019) Feature Selection</h2>
+<pre><code>library(caret)
+control <- rfeControl(functions = rfFuncs, method = "cv", number = 10)
+results <- rfe(train[, -target_index], train$target, sizes = c(1:5), rfeControl = control)
+</code></pre>
+
+<h2>020) Neural Network Regression with NeuralNetTools</h2>
+<pre><code># neuralnet, regression, prediction, mse, mtcars, scaling, neural network, plotnet
+library(NeuralNetTools)
+library(neuralnet)
+data(mtcars)
+mtcars_scaled <- as.data.frame(scale(mtcars))
+set.seed(42)
+indices <- sample(1:nrow(mtcars_scaled), nrow(mtcars_scaled)*0.7)
+train_data <- mtcars_scaled[indices, ]
+test_data <- mtcars_scaled[-indices, ]
+nn <- neuralnet(mpg ~ ., data = train_data, hidden = c(2, 2), linear.output = TRUE)
+predictions_scaled <- predict(nn, test_data[,-1])
+mse <- mean((test_data$mpg - predictions_scaled)^2)
+cat("MSE:", mse)
+plotnet(nn)</code></pre>
+
+<h2>021) Linear Regression with glm</h2>
+<pre><code># glm, linear model, regression, gaussian, prediction, mse, summary, mtcars
+data(mtcars)
+set.seed(123)
+indices <- sample(1:nrow(mtcars), nrow(mtcars)*0.7)
+train_data <- mtcars[indices, ]
+test_data <- mtcars[-indices, ]
+model <- glm(mpg ~ ., data = train_data, family = gaussian())
+summary(model)
+predictions <- predict(model, newdata = test_data)
+mse <- mean((test_data$mpg - predictions)^2)
+cat("The Mean Squared Error of the predictions is", mse)</code></pre>
+
+<h2>022) SVM Regression Comparison (Radial vs Polynomial Kernel)</h2>
+<pre><code># svm, regression, mtcars, radial, polynomial, accuracy, prediction, caret
+library(e1071)
+library(caret)
+data(mtcars)
+set.seed(123)
+trainIndex <- createDataPartition(mtcars$mpg, p = 0.7, list = FALSE)
+mtcarsTrain <- mtcars[trainIndex,]
+mtcarsTest <- mtcars[-trainIndex,]
+svm_model1 <- svm(mpg ~ ., data = mtcarsTrain, type = "eps-regression", kernel = 'radial')
+summary(svm_model1)
+svm_model2 <- svm(mpg ~ ., data = mtcarsTrain, type = "eps-regression", kernel = 'polynomial')
+summary(svm_model2)
+predictions1 <- predict(svm_model1, mtcarsTest)
+predictions2 <- predict(svm_model2, mtcarsTest)
+svm_accuracy1 <- postResample(predictions1, mtcarsTest$mpg)
+svm_accuracy2 <- postResample(predictions2, mtcarsTest$mpg)
+svm_accuracy1
+svm_accuracy2</code></pre>
+
+<h2>023) SVM Regression Contour Plot</h2>
+<pre><code># svm, radial, contour, wt, hp, prediction, ggplot2
+svm_model3 <- svm(mpg ~ wt + hp, data = mtcarsTrain, type = "eps-regression", kernel = 'radial')
+wt_seq <- seq(min(mtcarsTrain$wt), max(mtcarsTrain$wt), length.out = 100)
+hp_seq <- seq(min(mtcarsTrain$hp), max(mtcarsTrain$hp), length.out = 100)
+grid <- expand.grid(wt = wt_seq, hp = hp_seq)
+grid$mpg <- predict(svm_model3, newdata = grid)
+ggplot(grid, aes(x = wt, y = hp, fill = mpg)) +
+  geom_tile() +
+  geom_contour(aes(z = mpg), color = "white") +
+  labs(title = "SVR Model Prediction of mpg", x = "Weight", y = "Horsepower", fill = "mpg") +
+  theme_minimal() +
+  geom_point(data = mtcars, aes(x = wt, y = hp, color = mpg), size = 3)</code></pre>
+
+<h2>024) Logistic Regression and Regression Line</h2>
+<pre><code># glm, logistic regression, vs, regression line, mpg, wt
+model <- glm(vs ~ mpg + wt + hp, data = mtcars, family = binomial)
+summary(model)
+ggplot(mtcars, aes(x=wt, y=mpg)) +
+  geom_point() +
+  geom_smooth(method=lm, se=FALSE, color="red", linetype="dashed") +
+  theme_minimal() +
+  labs(title="Simple Linear Regression: MPG vs Weight", x="Weight", y="Miles per Gallon")</code></pre>
+
+<h2>025) ANOVA with PlantGrowth</h2>
+<pre><code># anova, PlantGrowth, summary, group comparison
+data(PlantGrowth)
+str(PlantGrowth)
+summary(PlantGrowth)
+model <- aov(weight ~ group, data=PlantGrowth)
+summary(model)</code></pre>
+
+<h2>026) ANN Model on Rock Dataset</h2>
+<pre><code># ann, neuralnet, normalization, rock, plotnet
+library(neuralnet)
+library(NeuralNetTools)
+data("rock")
+str(rock)
+summary(rock)
+maxs <- apply(rock, 2, max)
+mins <- apply(rock, 2, min)
+scaled_rock <- as.data.frame(scale(rock, center = mins, scale = maxs - mins))
+set.seed(123)
+nn <- neuralnet(perm ~ area + peri + shape, data = scaled_rock)
+plotnet(nn)</code></pre>
+
+<h1>Loops, Repeats and Factorials</h1>
+
+<h2>027) For Loop Fibonacci</h2>
+<pre><code># fibonacci, loop, sequence, for, iteration
+a <- 1
+b <- 2
+for(i in 1:10){
+  print(a)
+  a <- (b <- a + b) - a
+}</code></pre>
+
+<h2>028) Factorial of n Using Repeat</h2>
+<pre><code># factorial, repeat, control, multiplication, break
+n <- 5
+if (n < 0) {
+  print("Error")
+} else {
+  factorial <- 1
+  repeat {
+    if (n == 0) {
+      break}
+    factorial <- factorial * n
+    n <- n - 1
+  }
+  print(factorial)
+}</code></pre>
+
+<h2>029) Factorial Function Using For Loop</h2>
+<pre><code># factorial, for loop, function
+factorial_function <- function(n) {
+  factorial = 1
+  for (i in 1:n) {
+    factorial <- factorial * i
+  }
+  return(factorial)
+}
+factorial_function(10)</code></pre>
+
+<h2>030) Repeat Loop Until Sum Exceeds 10</h2>
+<pre><code># repeat loop, rnorm, iteration count, seed
+set.seed(100)
+total_sum <- 0
+iterations <- 0
+repeat {
+  sample <- rnorm(1)
+  total_sum <- total_sum + sample
+  iterations <- iterations + 1
+  if (total_sum > 10) {
+    break
+  }
+}
+iterations</code></pre>
+
+</body>
+</html>
