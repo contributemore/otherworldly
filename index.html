@@ -63,17 +63,22 @@
 <script>
   document.getElementById('searchInput').addEventListener('keyup', function () {
     var query = this.value.toLowerCase();
+    document.querySelectorAll('h1, .infobox').forEach(function(el) {
+      el.style.display = query ? 'none' : '';
+    });
     document.querySelectorAll('h2').forEach(function (header) {
       const block = header.nextElementSibling;
-      const text = header.textContent + block.textContent;
-      const match = text.toLowerCase().includes(query);
+      const text = (header.textContent + block.textContent).toLowerCase();
+      const match = text.includes(query);
       header.style.display = match ? '' : 'none';
       block.style.display = match ? '' : 'none';
     });
   });
 </script>
 
+
 <div class="infobox">
+  <h2><strong>💡 Tip:</strong> Use <kbd>Ctrl</kbd> + <kbd>F</kbd> to search this page quickly. You can search by keywords like <code>"normal"</code> or <code>"eigen"</code>.</h2>
   <p><strong>⚠️ CARET Library Issue:</strong> If <code>library(caret)</code> fails to load in your R environment, you might need to explicitly install its dependencies with binaries. Run this before loading caret:</p>
   <pre><code>install.packages("parallelly", type="binary")
 install.packages("future", type="binary")
