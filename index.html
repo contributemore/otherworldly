@@ -7,13 +7,8 @@
   <meta name="description" content="R programming examples for statistical analysis, data visualization, matrix operations, and more.">
   <meta name="keywords" content="R, exam, distributions, ggplot2, dplyr, matrix, data analysis, reference">
 
-  <!-- ✅ HTTPS Canonical URL -->
   <link rel="canonical" href="https://www.michaellatsky.co.za/">
-
-  <!-- ✅ Enforce HTTPS asset loading -->
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-
-  <!-- ✅ Prevent referrer leaking to HTTP domains -->
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
   <style>
@@ -128,6 +123,7 @@ dot_product
 <h2>006) MPG Dataset Analysis with dplyr</h2>
 <pre><code># dplyr, filter, carmodels, barplot, ggplot, geom_bar, manufacturer, subset
 library(dplyr)
+library(ggplot2)
 chosen_models <- c("civic", "sentra", "golf", "altima", "rogue 4wd", "malibu")
 filtered_data <- mpg %>%
   filter(model %in% chosen_models)
@@ -141,6 +137,13 @@ ggplot(filtered_data) +
 
 <h2>007) Engine Displacement Boxplot</h2>
 <pre><code># boxplot, engine, displacement, manufacturer, ggplot, geom_boxplot, mpg
+library(ggplot2)
+library(dplyr)
+
+# reuse filtered_data from previous example or redefine
+filtered_data <- mpg %>%
+  filter(model %in% c("civic", "sentra", "golf", "altima", "rogue 4wd", "malibu"))
+
 ggplot(filtered_data, aes(x = manufacturer, y = displ, fill = manufacturer)) +
   geom_boxplot() +
   labs(title = "Engine Size Across Manufacturers", 
@@ -207,13 +210,14 @@ plot(data_set$p, data_set$log_p, type = "l", col = "blue", xlab = "p", ylab = "l
 title(main = "Graph of p.log(p) for 0 < p ≤ 1")
 </code></pre>
 
-<h1>📘 Machine Learning Modelling</h21>
+<h1>📘 Machine Learning Modelling</h1>
 
 <h2>012) Standard Modelling Workflow</h2>
-<pre><code>data <- read.csv("data.csv")
+<pre><code>library(caret)
+
+data <- read.csv("data.csv")
 data <- na.omit(data)
 
-library(caret)
 trainIndex <- createDataPartition(data$target, p = .8, list = FALSE)
 train <- data[trainIndex,]
 test <- data[-trainIndex,]
@@ -248,9 +252,11 @@ fit <- svm(target ~ ., data = train)
 fit <- lm(target ~ ., data = train)
 
 # Random Forest
+library(randomForest)
 fit <- randomForest(target ~ ., data = train)
 
 # Gradient Boosting
+library(gbm)
 fit <- gbm(target ~ ., data = train, distribution = "gaussian")
 </code></pre>
 
@@ -277,7 +283,9 @@ plot(tsne$Y)
 </code></pre>
 
 <h2>017) Model Validation</h2>
-<pre><code># Cross Validation
+<pre><code>library(caret)
+
+# Cross Validation
 trainControl <- trainControl(method = "cv", number = 10)
 model <- train(target ~ ., data = train, method = "rf", trControl = trainControl)
 
