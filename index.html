@@ -47,13 +47,34 @@
       background: #2d2d2d;
       color: #f8f8f2;
     }
+    input#searchInput {
+      margin-bottom: 20px;
+      padding: 8px;
+      width: 100%;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
 
+<input type="text" id="searchInput" placeholder="Search for tags...">
+<script>
+  document.getElementById('searchInput').addEventListener('keyup', function () {
+    var query = this.value.toLowerCase();
+    document.querySelectorAll('h2').forEach(function (header) {
+      const block = header.nextElementSibling;
+      const text = header.textContent + block.textContent;
+      const match = text.toLowerCase().includes(query);
+      header.style.display = match ? '' : 'none';
+      block.style.display = match ? '' : 'none';
+    });
+  });
+</script>
+
 <div class="infobox">
   <h2><strong>💡 Tip:</strong> Use <kbd>Ctrl</kbd> + <kbd>F</kbd> to search this page quickly. You can search by keywords like <code>"normal"</code> or <code>"eigen"</code>.</h2>
-
   <p><strong>⚠️ CARET Library Issue:</strong> If <code>library(caret)</code> fails to load in your R environment, you might need to explicitly install its dependencies with binaries. Run this before loading caret:</p>
   <pre><code>install.packages("parallelly", type="binary")
 install.packages("future", type="binary")
@@ -308,6 +329,61 @@ plot(forecasted)
 control <- rfeControl(functions = rfFuncs, method = "cv", number = 10)
 results <- rfe(train[, -target_index], train$target, sizes = c(1:5), rfeControl = control)
 </code></pre>
+
+<h2>020) For Loop Fibonacci</h2>
+<pre><code># fibonacci, loop, sequence, for, iteration
+a <- 1
+b <- 2
+for(i in 1:10){
+  print(a)
+  a <- (b <- a + b) - a
+}</code></pre>
+
+<h2>021) Factorial of n Using Repeat</h2>
+<pre><code># factorial, repeat, control, multiplication, break
+n <- 5
+if (n < 0) {
+  print("Error")
+} else {
+  factorial <- 1
+  repeat {
+    if (n == 0) {
+      break}
+    factorial <- factorial * n
+    n <- n - 1
+  }
+  print(factorial)
+}</code></pre>
+
+<h2>022) Neural Network Regression with NeuralNetTools</h2>
+<pre><code># neuralnet, regression, prediction, mse, mtcars, scaling, neural network, plotnet
+library(NeuralNetTools)
+library(neuralnet)
+data(mtcars)
+mtcars_scaled <- as.data.frame(scale(mtcars))
+set.seed(42)
+indices <- sample(1:nrow(mtcars_scaled), nrow(mtcars_scaled)*0.7)
+train_data <- mtcars_scaled[indices, ]
+test_data <- mtcars_scaled[-indices, ]
+nn <- neuralnet(mpg ~ ., data = train_data, hidden = c(2, 2), linear.output = TRUE)
+predictions_scaled <- predict(nn, test_data[,-1])
+mse <- mean((test_data$mpg - predictions_scaled)^2)
+cat("MSE:", mse)
+plotnet(nn)</code></pre>
+
+<h2>023) Linear Regression with glm</h2>
+<pre><code># glm, linear model, regression, gaussian, prediction, mse, summary, mtcars
+
+data(mtcars)
+set.seed(123)
+indices <- sample(1:nrow(mtcars), nrow(mtcars)*0.7)
+train_data <- mtcars[indices, ]
+test_data <- mtcars[-indices, ]
+model <- glm(mpg ~ ., data = train_data, family = gaussian())
+summary(model)
+predictions <- predict(model, newdata = test_data)
+mse <- mean((test_data$mpg - predictions)^2)
+cat("The Mean Squared Error of the predictions is", mse)</code></pre>
 
 </body>
 </html>
