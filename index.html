@@ -469,5 +469,170 @@ repeat {
 }
 iterations</code></pre>
 
+<h1>Quick Tips</h1>
+
+<h2>031) Getting Help</h2>
+<pre><code># Help for a specific function
+?mean
+
+# Search help files for a phrase
+help.search('weighted mean')
+
+# Help for a package
+help(package = 'dplyr')
+</code></pre>
+
+<h2>032) More About an Object</h2>
+<pre><code># Summary of structure
+str(iris)
+
+# Get class of an object
+class(iris)
+</code></pre>
+
+<h2>033) Using Packages</h2>
+<pre><code># Install a package
+install.packages('dplyr')
+
+# Load a package
+library(dplyr)
+
+# Use a specific function from a package
+dplyr::select
+
+# Load a built-in dataset
+data(iris)
+</code></pre>
+
+<h2>034) Working Directory</h2>
+<pre><code># Get current working directory
+getwd()
+
+# Set working directory
+setwd('C://file/path')
+</code></pre>
+
+<h2>035) Creating Vectors</h2>
+<pre><code># Combine elements
+c(2, 4, 6)
+
+# Sequence of integers
+2:6
+
+# Complex sequence
+seq(2, 3, by = 0.5)
+
+# Repeat vector
+rep(1:2, times = 3)
+
+# Repeat each element
+rep(1:2, each = 3)
+</code></pre>
+
+<h2>036) Vector Functions</h2>
+<pre><code># Sort
+sort(x)
+
+# Reverse
+rev(x)
+
+# Frequency count
+table(x)
+
+# Unique values
+unique(x)
+</code></pre>
+
+<h2>037) Selecting Vector Elements by Position</h2>
+<pre><code># Fourth element
+x[4]
+
+# All but fourth
+x[-4]
+
+# Elements 2 to 4
+x[2:4]
+
+# All except 2 to 4
+x[-(2:4)]
+
+# Elements 1 and 5
+x[c(1, 5)]
+</code></pre>
+
+<h2>038) Selecting Vector Elements by Value</h2>
+<pre><code># Elements equal to 10
+x[x == 10]
+
+# Elements less than zero
+x[x < 0]
+
+# Elements in set
+x[x %in% c(1, 2, 5)]
+</code></pre>
+
+<h2>039) Named Vector Elements</h2>
+<pre><code># Access by name
+x['apple']
+</code></pre>
+
+<h2>040) For Loop Example</h2>
+<pre><code>for (i in 1:4) {
+  j <- i + 10
+  print(j)
+}
+</code></pre>
+
+<h2>041) While Loop Example</h2>
+<pre><code>i <- 1
+while (i < 5) {
+  print(i)
+  i <- i + 1
+}
+</code></pre>
+
+<h2>042) If Statement Example</h2>
+<pre><code>if (i > 3) {
+  print('Yes')
+} else {
+  print('No')
+}
+</code></pre>
+
+<h2>043) Custom Function</h2>
+<pre><code>square <- function(x) {
+  squared <- x * x
+  return(squared)
+}
+</code></pre>
+
+<h2>044) Logical Conditions</h2>
+<pre><code># Comparisons
+a == b  # Equal
+a != b  # Not equal
+a > b   # Greater
+a < b   # Less
+a >= b  # Greater or equal
+a <= b  # Less or equal
+
+# Missing/null checks
+is.na(a)    # Is missing
+is.null(a)  # Is null
+</code></pre>
+
+<h2>045) Reading and Writing Data</h2>
+<pre><code># Read/write text file
+df <- read.table('file.txt')
+write.table(df, 'file.txt')
+
+# Read/write CSV
+df <- read.csv('file.csv')
+write.csv(df, 'file.csv')
+
+# Read/write RData
+load('file.RData')
+save(df, file = 'file.RData')
+</code></pre>
+
 </body>
 </html>
